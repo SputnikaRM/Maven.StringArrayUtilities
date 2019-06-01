@@ -53,8 +53,6 @@ public class StringArrayUtils {
         for (int x = 0; x <= array.length; x++) {
             if (array[x] == value) {
                 return true;
-            } else {
-                return false;
             }
 
         }
@@ -154,7 +152,19 @@ public class StringArrayUtils {
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
-return array;
+
+        ArrayList<String> arr = new ArrayList<>();
+        arr.add(array[0]);
+        for (int x=0; x<array.length-1; x++) {
+
+            if (!(array[x] == array[x+1])){
+
+                arr.add(array[x+1]);
+            }
+        }
+        String [] e = new String [arr.size()];
+        arr.toArray(e);
+        return e;
     }
 
     /**
@@ -162,6 +172,11 @@ return array;
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-   return array;
+        ArrayList <String> arr = new ArrayList<> ();
+
+       return null;
+
+    }
+
 
 }
