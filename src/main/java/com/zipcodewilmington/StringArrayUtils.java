@@ -175,29 +175,37 @@ public class StringArrayUtils {
 
         ArrayList <String> result = new ArrayList<> ();
         String compared = array[0];
+        String holding = array[0];
 
 
 
+        for(int x=1; x<array.length; x++){
 
-        for(int x=1; x<array.length-1; x++){
-            String holding = array[x];
             if(compared == array[x]) {
                 holding=holding.concat(array[x]);
 
             } else if (!(compared == array[x])) {
                 result.add(holding);
+                holding = array[x];
+
 
                 compared=array[x];
 
 
             }
+
+
             System.out.println("compared = " + compared);
             System.out.println(array[x]);
             System.out.println("holding =" + holding);
         }
-
+        result.add(holding);
         String [] e = new String [result.size()];
         result.toArray(e);
+        System.out.println("THE RESULT");
+        for(int i=0; i < e.length; i++){
+            System.out.print(e[i] + "  ");
+        }
         return e;
 
 
