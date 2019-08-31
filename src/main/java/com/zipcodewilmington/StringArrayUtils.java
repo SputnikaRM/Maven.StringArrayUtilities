@@ -1,7 +1,11 @@
 package com.zipcodewilmington;
 
-import java.lang.StringBuilder;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 
 /**
@@ -49,14 +53,14 @@ public class StringArrayUtils {
      * @return true if the array contains the specified `value`
      */ // TODO
     public static boolean contains(String[] array, String value) {
+        return Arrays.asList(array).contains(value);
+//        for (int x = 0; x <= array.length; x++) {
+//            if (array[x] == value) {
+//                return true;
+//            }
+//        }
+//        return false;
 
-        for (int x = 0; x <= array.length; x++) {
-            if (array[x] == value) {
-                return true;
-            }
-
-        }
-        return false;
     }
 
     /**
@@ -65,16 +69,18 @@ public class StringArrayUtils {
      */ // TODO
     public static String[] reverse(String[] array) {
 
-        ArrayList<String> arr = new ArrayList<String>();
-        for (int x = array.length - 1; x >= 0; x--) {
-            arr.add(array[x]);
-        }
-        String[] e = new String[arr.size()];
-
-
-        return arr.toArray(e);
-
-
+        List<String> rev = Arrays.asList(array);
+        Collections.reverse(rev);
+        String[] arr = rev.toArray(new String[0]);
+        return arr;
+//        ArrayList<String> arr = new ArrayList<String>();
+//        for (int x = array.length - 1; x >= 0; x--) {
+//            arr.add(array[x]);
+//        }
+//        String[] e = new String[arr.size()];
+//
+//
+//        return arr.toArray(e);
     }
 
     /**
@@ -88,9 +94,8 @@ public class StringArrayUtils {
             if (array[x] == array[y - 1])
                 return true;
         }
-
-
         return false;
+
     }
 
     /**
@@ -106,7 +111,6 @@ public class StringArrayUtils {
             if (!y.contains(x.toString())) {
                 return false;
             }
-
         }
         return true;
 
@@ -118,15 +122,21 @@ public class StringArrayUtils {
      * @return number of occurrences the specified `value` has occurred
      */ // TODO
     public static int getNumberOfOccurrences(String[] array, String value) {
-
-        int number = 0;
-        for (int x = 0; x <= array.length - 1; x++) {
-            if (array[x] == value) {
-                number++;
-
-            }
+        int counter = 0;
+        for (String s : array) {
+            if (s.equals(value))
+                counter++;
         }
-        return number;
+        return counter;
+//        int number = 0;
+//        for (int x = 0; x <= array.length - 1; x++) {
+//            if (array[x] == value) {
+//                number++;
+//
+//            }
+//        }
+//        return number;
+
     }
 
     /**
@@ -135,15 +145,22 @@ public class StringArrayUtils {
      * @return array with identical contents excluding values of `value`
      */ // TODO
     public static String[] removeValue(String[] array, String valueToRemove) {
-        ArrayList<String> arr = new ArrayList<String>();
-        for (int x =0; x<array.length; x++){
-            arr.add(array[x]);
+        List<String> list = new ArrayList<>();
+        for (String s : array) {
+            if (s != valueToRemove)
+                list.add(s);
         }
-        arr.remove(valueToRemove);
+        return list.toArray(new String[0]);
+        //        ArrayList<String> arr = new ArrayList<String>();
+//        for (int x = 0; x < array.length; x++) {
+//            arr.add(array[x]);
+//        }
+//        arr.remove(valueToRemove);
+//
+//        String[] e = new String[arr.size()];
+//
+//        return arr.toArray(e);
 
-        String[] e = new String[arr.size()];
-
-        return arr.toArray(e);
     }
 
 
@@ -153,16 +170,16 @@ public class StringArrayUtils {
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
 
+
         ArrayList<String> arr = new ArrayList<>();
         arr.add(array[0]);
-        for (int x=0; x<array.length-1; x++) {
+        for (int x = 0; x < array.length - 1; x++) {
 
-            if (!(array[x] == array[x+1])){
-
-                arr.add(array[x+1]);
+            if ((array[x] != array[x + 1])) {
+                arr.add(array[x + 1]);
             }
         }
-        String [] e = new String [arr.size()];
+        String[] e = new String[arr.size()];
         arr.toArray(e);
         return e;
     }
@@ -173,23 +190,22 @@ public class StringArrayUtils {
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
 
-        ArrayList <String> result = new ArrayList<> ();
+        ArrayList<String> result = new ArrayList<>();
         String compared = array[0];
         String holding = array[0];
 
 
+        for (int x = 1; x < array.length; x++) {
 
-        for(int x=1; x<array.length; x++){
-
-            if(compared == array[x]) {
-                holding=holding.concat(array[x]);
+            if (compared == array[x]) {
+                holding = holding.concat(array[x]);
 
             } else if (!(compared == array[x])) {
                 result.add(holding);
                 holding = array[x];
 
 
-                compared=array[x];
+                compared = array[x];
 
 
             }
@@ -200,10 +216,10 @@ public class StringArrayUtils {
             System.out.println("holding =" + holding);
         }
         result.add(holding);
-        String [] e = new String [result.size()];
+        String[] e = new String[result.size()];
         result.toArray(e);
         System.out.println("THE RESULT");
-        for(int i=0; i < e.length; i++){
+        for (int i = 0; i < e.length; i++) {
             System.out.print(e[i] + "  ");
         }
         return e;
